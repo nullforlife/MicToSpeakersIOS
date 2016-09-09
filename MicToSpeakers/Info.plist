@@ -35,6 +35,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
     <key>NSMicrophoneUsageDescription</key>
-    <string>The app need access to your microphone to be able to talk with other people</string>
+    <string>The app need access to your microphone to record your voice</string>
 </dict>
 </plist>
