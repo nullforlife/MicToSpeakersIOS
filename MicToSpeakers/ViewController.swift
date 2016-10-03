@@ -10,10 +10,18 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
+    
     var engine = AVAudioEngine()
+    var recordingSession = AVAudioSession.sharedInstance()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        try! recordingSession.setMode(AVAudioSessionModeVoiceChat)
+        try! recordingSession.setActive(true)
+        try! recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try! recordingSession.setPreferredSampleRate(8000) // Human voice can only make sounds at this samplerate
         
         let input = engine.inputNode!
         let mixer = engine.mainMixerNode
