@@ -16,23 +16,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let input = engine.inputNode!
-        let player = AVAudioPlayerNode()
-        engine.attachNode(player)
+        let mixer = engine.mainMixerNode
         
         
         let bus = 0
-        let inputFormat = input.inputFormatForBus(bus)
-        engine.connect(player, to: engine.mainMixerNode, format: inputFormat)
+        let inputFormat = input.inputFormat(forBus: bus)
+        engine.connect(input, to: mixer, format: inputFormat)
         
-        input.installTap(onBus: bus, bufferSize: 2048, format: inputFormat, block: {
-            (buffer: AVAudioPCMBuffer!, time: AVAudioTime!) -> Void in
-            
-            let audioBuffer = self.typetobinary(buffer)
-            stream.write(audioBuffer, maxLength: audioBuffer.count)
-        })
-
-    
         try! engine.start()
-        player.play()
+
     }
 }
